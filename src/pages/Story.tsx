@@ -1,21 +1,50 @@
+import { Link } from 'react-router-dom'
+import { ArrowRight } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import HeroScrollVideo from '@/components/ui/scroll-animated-video'
+
 export default function Story() {
   return (
     <div>
-      {/* Hero */}
-      <section className="bg-charcoal py-20 sm:py-28">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="font-serif text-4xl sm:text-5xl font-light text-white leading-tight">
-            Our <span className="text-gold italic">Story</span>
-          </h1>
-          <p className="mt-6 text-lg text-cream-dark/80 leading-relaxed">
-            A bridge between Moroccan artisan tradition and French design sensibility
-          </p>
-        </div>
-      </section>
+      {/* Scroll-animated video hero */}
+      <HeroScrollVideo
+        title="Our Story"
+        subtitle="Moroccan Craft, French Design"
+        meta="Est. 2024"
+        credits={
+          <>
+            <p>Maison Chapuis</p>
+            <p>Marrakech to America</p>
+          </>
+        }
+        media="/ryad-entrance.mp4"
+        poster="/hero-tent.webp"
+        overlay={{
+          caption: "MAISON CHAPUIS",
+          heading: "A Heritage of Light",
+          paragraphs: [
+            "For generations, the artisans of Marrakech, Fes, and the Atlas Mountains have shaped raw brass into extraordinary works of light.",
+            "Maison Chapuis brings this living tradition to your home — each piece handcrafted, each pattern unique, each shadow a story.",
+          ],
+          extra: (
+            <div style={{ marginTop: '1rem' }}>
+              <Link to="/shop">
+                <Button className="rounded-3xl bg-gold text-white hover:bg-gold-dark tracking-wider">
+                  Explore the Collection
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </Link>
+            </div>
+          ),
+        }}
+        initialBoxSize={380}
+        scrollHeightVh={300}
+        smoothScroll={false}
+      />
 
-      {/* Content */}
-      <section className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
-        <div className="prose-custom space-y-8">
+      {/* Content sections */}
+      <section className="container py-16 sm:py-24">
+        <div className="max-w-3xl mx-auto space-y-12">
           <div>
             <h2 className="font-serif text-2xl sm:text-3xl font-light text-charcoal mb-4">
               Where Two Worlds Meet
@@ -32,6 +61,15 @@ export default function Story() {
               lighting and decor with soul, with story, with the unmistakable mark of the
               human hand.
             </p>
+          </div>
+
+          {/* Lifestyle image break */}
+          <div className="rounded-3xl overflow-hidden">
+            <img
+              src="/lifestyle-teardrop-lit.jpg"
+              alt="Brass pendant light glowing in a Moroccan workshop"
+              className="w-full h-[400px] object-cover"
+            />
           </div>
 
           <div>
@@ -52,6 +90,15 @@ export default function Story() {
               fixture — it's a work of art that casts unique patterns of light and shadow,
               different with every piece.
             </p>
+          </div>
+
+          {/* Another lifestyle image */}
+          <div className="rounded-3xl overflow-hidden">
+            <img
+              src="/lifestyle-wall-sconce.jpg"
+              alt="Intricate brass wall sconce pattern"
+              className="w-full h-[400px] object-cover"
+            />
           </div>
 
           <div>
@@ -85,6 +132,16 @@ export default function Story() {
               beautiful lighting — you're preserving a living tradition and connecting your
               space to centuries of artisan mastery.
             </p>
+          </div>
+
+          {/* CTA */}
+          <div className="text-center pt-8">
+            <Link to="/shop">
+              <Button size="lg" className="rounded-3xl bg-gold text-white hover:bg-gold-dark tracking-wider group">
+                Shop the Collection
+                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
