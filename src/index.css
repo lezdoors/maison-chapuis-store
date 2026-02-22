@@ -2,6 +2,7 @@
 @import "tailwindcss";
 
 @theme {
+  /* Brand colors */
   --color-gold: #C5A455;
   --color-gold-light: #D4BA78;
   --color-gold-dark: #A68B3C;
@@ -13,19 +14,67 @@
   --color-blue: #1E3A5F;
   --color-blue-light: #2A4F7A;
 
+  /* shadcn-compatible semantic tokens */
+  --color-background: #FAF8F5;
+  --color-foreground: #2C2C2C;
+  --color-muted: #F0EBE3;
+  --color-muted-foreground: #4A4A4A;
+  --color-primary: #C5A455;
+  --color-primary-foreground: #FFFFFF;
+  --color-secondary: #E8DFD0;
+  --color-secondary-foreground: #2C2C2C;
+  --color-accent: #F0EBE3;
+  --color-accent-foreground: #2C2C2C;
+  --color-destructive: #DC2626;
+  --color-destructive-foreground: #FFFFFF;
+  --color-border: #E8DFD0;
+  --color-input: #E8DFD0;
+  --color-ring: #C5A455;
+
   --font-serif: 'Cormorant Garamond', Georgia, serif;
   --font-sans: 'Inter', system-ui, sans-serif;
+
+  --radius-sm: 0.25rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+  --radius-2xl: 1rem;
+  --radius-3xl: 1.5rem;
 }
 
 body {
   margin: 0;
   font-family: var(--font-sans);
-  color: var(--color-charcoal);
-  background-color: var(--color-cream);
+  color: var(--color-foreground);
+  background-color: var(--color-background);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 h1, h2, h3, h4 {
   font-family: var(--font-serif);
+}
+
+/* Container utility */
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+  .container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
 }

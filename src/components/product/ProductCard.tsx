@@ -22,12 +22,13 @@ export default function ProductCard({ product }: ProductCardProps) {
 
   return (
     <Link to={`/product/${product.slug}`} className="group block">
-      <div className="aspect-square bg-white rounded-lg overflow-hidden">
+      <div className="aspect-square bg-charcoal rounded-2xl overflow-hidden">
         <img
           src={product.images[0]}
           alt={product.name}
           loading="lazy"
-          className="w-full h-full object-contain p-4 group-hover:scale-105 transition-transform duration-500"
+          className="w-full h-full object-contain p-8 group-hover:scale-110 transition-transform duration-500"
+          style={{ filter: 'drop-shadow(0 20px 40px rgba(197,164,85,0.3))' }}
         />
       </div>
       <div className="mt-4">
