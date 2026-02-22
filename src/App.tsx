@@ -11,6 +11,7 @@ import Story from '@/pages/Story'
 import Shipping from '@/pages/Shipping'
 import Contact from '@/pages/Contact'
 import Terms from '@/pages/Terms'
+import Waitlist from '@/pages/Waitlist'
 
 const queryClient = new QueryClient()
 
@@ -27,6 +28,7 @@ export default function App() {
         <BrowserRouter>
           <ScrollToTop />
           <Routes>
+            <Route path="/waitlist" element={<Waitlist />} />
             <Route element={<Layout />}>
               <Route path="/" element={<Home />} />
               <Route path="/shop" element={<Shop />} />
