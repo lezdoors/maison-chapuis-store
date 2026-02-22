@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
 import { products } from '@/data/products'
 import ProductCard from '@/components/product/ProductCard'
+import { HeroSection } from '@/components/ui/hero-section'
 
 const featured = products.filter(p => p.is_featured)
 
@@ -9,47 +10,39 @@ export default function Home() {
   return (
     <div>
       {/* Hero */}
-      <section className="relative bg-charcoal overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-32 lg:py-40">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="text-center lg:text-left">
-              <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-light text-white leading-tight">
-                Where Moroccan
-                <br />
-                <span className="text-gold italic">craft</span> meets
-                <br />
-                French <span className="text-gold italic">design</span>
-              </h1>
-              <p className="mt-6 text-lg text-cream-dark/80 max-w-lg mx-auto lg:mx-0">
-                Handcrafted brass lighting and ceramics, made by master artisans
-                in Morocco. Each piece tells a story of centuries-old tradition.
-              </p>
-              <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                <Link
-                  to="/shop"
-                  className="inline-flex items-center justify-center gap-2 bg-gold hover:bg-gold-dark text-white px-8 py-3.5 text-sm font-medium tracking-wide transition-colors"
-                >
-                  Shop the Collection
-                  <ArrowRight size={16} />
-                </Link>
-                <Link
-                  to="/story"
-                  className="inline-flex items-center justify-center gap-2 border border-cream-dark/30 text-cream-dark hover:border-gold hover:text-gold px-8 py-3.5 text-sm font-medium tracking-wide transition-colors"
-                >
-                  Our Story
-                </Link>
-              </div>
-            </div>
-            <div className="hidden lg:block">
-              <img
-                src="/products/poire-andalouse.jpg"
-                alt="Poire Andalouse pendant light"
-                className="w-full max-w-md mx-auto drop-shadow-2xl"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
+      <HeroSection
+        logo={{
+          url: '/logo.png',
+          alt: 'Maison Chapuis',
+          text: 'MAISON CHAPUIS',
+        }}
+        slogan="MOROCCAN CRAFT, FRENCH DESIGN"
+        title={
+          <>
+            Where Moroccan
+            <br />
+            <span className="text-gold italic">craft</span> meets
+            <br />
+            French <span className="text-gold italic">design</span>
+          </>
+        }
+        subtitle="Handcrafted brass lighting and ceramics, made by master artisans in Morocco. Each piece tells a story of centuries-old tradition."
+        callToAction={{
+          text: 'SHOP THE COLLECTION',
+          href: '/shop',
+        }}
+        secondaryAction={{
+          text: 'Our Story',
+          href: '/story',
+        }}
+        backgroundImage="/hero-tent.webp"
+        trustSignals={{
+          line1: 'maison-chapuis.com',
+          line2: 'Free US shipping over $300',
+          line3: 'Handcrafted in Morocco',
+        }}
+        className="min-h-[600px] md:min-h-[700px]"
+      />
 
       {/* Trust strip */}
       <section className="bg-cream-dark border-y border-sand">
