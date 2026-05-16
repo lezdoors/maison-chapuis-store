@@ -3,7 +3,7 @@ export interface Product {
   name: string
   slug: string
   description: string
-  category: 'pendants' | 'wall-sconces' | 'ceramics'
+  category: 'tagines' | 'ceramics' | 'glassware' | 'rugs'
   price_usd: number
   dimensions: {
     height?: string

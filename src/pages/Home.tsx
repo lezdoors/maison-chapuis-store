@@ -51,33 +51,33 @@ export default function Home() {
       {/* Section 3 — CAMPAIGN BANNERS */}
       <section id="campaign-banners">
         <CampaignBanner
-          eyebrow="The Lighting"
-          heading="Lighting from Marrakech."
-          body="Three generations of metalwork in a single courtyard, hand-pierced one hole at a time. Every piece you buy keeps that courtyard lit."
-          ctaLabel="Shop lighting"
-          ctaHref="/lighting"
+          eyebrow="The Ceramics"
+          heading="Clay from Fes and Safi."
+          body="Tagines, bowls, plates, pitchers — hand-thrown in the workshops of Fes and Safi and finished in lead-free Moroccan pigment. The first pieces leave the kiln in Spring 2026."
+          ctaLabel="Shop ceramics"
+          ctaHref="/shop?cat=ceramics"
           image="/hero-tent.webp"
-          imageAlt="Brass lanterns lit at dusk in a Moroccan tent setting"
+          imageAlt="A Moroccan table set with hand-painted tagines and ceramic bowls"
           imageSide="left"
         />
         <CampaignBanner
-          eyebrow="The Ceramics"
-          heading="In the kiln."
-          body="Stoneware thrown in the workshops of Fes and finished in lead-free Moroccan pigment. The first pieces leave the kiln in Spring 2026."
-          ctaLabel="View ceramics"
-          ctaHref="/ceramics"
+          eyebrow="The Glassware"
+          heading="Mouth-blown in the medina."
+          body="Moroccan tea glasses, decanters, and carafes — each one mouth-blown in the glassworks of the medina, then hand-painted or gilded at the rim."
+          ctaLabel="View glassware"
+          ctaHref="/shop?cat=glassware"
           image="/lifestyle-wall-sconce.jpg"
-          imageAlt="Hand-pierced brass wall sconce in soft daylight, suggesting the texture of forthcoming ceramic surfaces"
+          imageAlt="A set of hand-painted Moroccan tea glasses gilded at the rim, beside a silver teapot"
           imageSide="right"
         />
         <CampaignBanner
-          eyebrow="The Workshop"
-          heading="Direct from the atelier."
-          body="No middlemen and no production runs. Every piece is signed and numbered by the maalem who shaped it."
-          ctaLabel="Our story"
-          ctaHref="/story"
+          eyebrow="The Loom"
+          heading="Hand-knotted in the Atlas."
+          body="Beni Ourain, Boucherouite, and Azilal rugs — sourced directly from the women weavers of the high Atlas. No middlemen. Every rug signed by its weaver."
+          ctaLabel="Discover the rugs"
+          ctaHref="/shop?cat=rugs"
           image="/lifestyle-teardrop-lit.jpg"
-          imageAlt="Lit brass pendant casting geometric shadows in a Moroccan interior"
+          imageAlt="A hand-knotted Beni Ourain rug draped across a Moroccan floor in golden light"
           imageSide="left"
         />
       </section>
@@ -93,7 +93,7 @@ export default function Home() {
       >
         <div className="container">
           <p className="eyebrow" style={{ marginBottom: 12 }}>The Collection</p>
-          <h2 style={sectionHeading}>Lighting, ceramics, and the workshop behind them.</h2>
+          <h2 style={sectionHeading}>Tagines, ceramics, glassware, rugs — and the workshops behind them.</h2>
           <CategoryGrid />
         </div>
       </section>

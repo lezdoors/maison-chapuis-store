@@ -6,8 +6,15 @@ interface ProductCardProps {
   product: Product
 }
 
-const categoryLabel = (category: string) =>
-  category === 'pendants' ? 'Pendant' : category === 'wall-sconces' ? 'Wall sconce' : 'Ceramic'
+const categoryLabel = (category: string) => {
+  switch (category) {
+    case 'tagines': return 'Tagine'
+    case 'ceramics': return 'Ceramic'
+    case 'glassware': return 'Glassware'
+    case 'rugs': return 'Rug'
+    default: return ''
+  }
+}
 
 export default function ProductCard({ product }: ProductCardProps) {
   if (product.coming_soon) {
@@ -19,7 +26,7 @@ export default function ProductCard({ product }: ProductCardProps) {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            background: 'var(--color-bg-alt)',
+            background: '#ffffff',
           }}
         >
           <span
@@ -59,7 +66,7 @@ export default function ProductCard({ product }: ProductCardProps) {
     >
       <div
         className="aspect-square"
-        style={{ position: 'relative', background: 'var(--color-bg-alt)', overflow: 'hidden' }}
+        style={{ position: 'relative', background: '#ffffff', overflow: 'hidden' }}
       >
         <img
           src={product.images[0]}

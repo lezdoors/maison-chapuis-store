@@ -22,37 +22,38 @@ const NAV_RIGHT: NavLink[] = [
     mega: {
       columns: [
         {
-          title: 'Lighting',
+          title: 'Tagines & Ceramics',
           links: [
-            { to: '/lighting?cat=pendants', label: 'Pendants' },
-            { to: '/lighting?cat=sconces', label: 'Wall Sconces' },
-            { to: '/lighting?cat=lanterns', label: 'Lanterns' },
-            { to: '/lighting', label: 'All Lighting' },
+            { to: '/shop?cat=tagines', label: 'Tagines' },
+            { to: '/shop?cat=ceramics', label: 'Bowls & plates' },
+            { to: '/shop?cat=ceramics', label: 'Pitchers & serving' },
+            { to: '/shop?cat=ceramics', label: 'All ceramics' },
           ],
         },
         {
-          title: 'Ceramics',
+          title: 'Glassware & Rugs',
           links: [
-            { to: '/ceramics', label: 'Tableware' },
-            { to: '/ceramics', label: 'Vessels' },
-            { to: '/ceramics', label: 'Spring 2026 preview' },
+            { to: '/shop?cat=glassware', label: 'Tea glasses' },
+            { to: '/shop?cat=glassware', label: 'Decanters' },
+            { to: '/shop?cat=rugs', label: 'Beni Ourain' },
+            { to: '/shop?cat=rugs', label: 'Boucherouite & Azilal' },
           ],
         },
         {
           title: 'The Atelier',
           links: [
             { to: '/story', label: 'Our maalems' },
-            { to: '/story#materials', label: 'Brass and patina' },
+            { to: '/story#materials', label: 'Clay, glaze, glass' },
             { to: '/shipping', label: 'Lead times and care' },
           ],
         },
       ],
       feature: {
-        to: '/product/halo-de-casablanca',
-        image: '/products/halo-de-casablanca.jpg',
-        alt: 'Halo de Casablanca pendant — hand-pierced brass sphere',
-        eyebrow: 'New this season',
-        title: 'Halo de Casablanca',
+        to: '/shop?cat=tagines',
+        image: '',
+        alt: 'Tagine de Marrakech — hand-thrown glazed clay tagine',
+        eyebrow: 'Joining the catalogue',
+        title: 'Tagine de Marrakech',
       },
     },
   },
@@ -324,7 +325,7 @@ export default function Header() {
                 <Search size={18} strokeWidth={1.5} style={{ color: 'var(--color-muted)' }} />
                 <input
                   autoFocus
-                  placeholder="Search pendants, ceramics, journal…"
+                  placeholder="Search tagines, ceramics, rugs…"
                   style={{
                     flex: 1,
                     border: 0,
@@ -395,10 +396,11 @@ export default function Header() {
             <nav style={{ paddingTop: 24, display: 'flex', flexDirection: 'column', gap: 4 }}>
               {[
                 { to: '/shop', label: 'All Products' },
-                { to: '/lighting', label: 'Lighting' },
-                { to: '/ceramics', label: 'Ceramics' },
+                { to: '/shop?cat=tagines', label: 'Tagines' },
+                { to: '/shop?cat=ceramics', label: 'Ceramics' },
+                { to: '/shop?cat=glassware', label: 'Glassware' },
+                { to: '/shop?cat=rugs', label: 'Rugs' },
                 { to: '/story', label: 'The Atelier' },
-                { to: '/journal', label: 'Journal' },
                 { to: '/shipping', label: 'Shipping & Returns' },
                 { to: '/contact', label: 'Contact' },
               ].map((l) => (
@@ -517,21 +519,42 @@ function MegaMenuPanel({ panel, onClose }: { panel: MegaPanel; onClose: () => vo
           >
             <div
               className="aspect-[4/5]"
-              style={{ position: 'relative', background: 'var(--color-bg-alt)', overflow: 'hidden' }}
+              style={{
+                position: 'relative',
+                background: 'var(--color-bg-alt)',
+                overflow: 'hidden',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
             >
-              <img
-                src={panel.feature.image}
-                alt={panel.feature.alt}
-                loading="lazy"
-                style={{
-                  position: 'absolute',
-                  inset: 0,
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'contain',
-                  padding: 28,
-                }}
-              />
+              {panel.feature.image ? (
+                <img
+                  src={panel.feature.image}
+                  alt={panel.feature.alt}
+                  loading="lazy"
+                  style={{
+                    position: 'absolute',
+                    inset: 0,
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'contain',
+                    padding: 28,
+                  }}
+                />
+              ) : (
+                <span
+                  style={{
+                    fontFamily: 'var(--font-sans)',
+                    fontSize: 11,
+                    letterSpacing: '0.22em',
+                    textTransform: 'uppercase',
+                    color: 'var(--color-muted)',
+                  }}
+                >
+                  Spring 2026
+                </span>
+              )}
             </div>
             <p className="eyebrow-gold" style={{ margin: '14px 0 4px 0' }}>
               {panel.feature.eyebrow}

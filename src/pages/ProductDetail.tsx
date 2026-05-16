@@ -42,7 +42,7 @@ export default function ProductDetail() {
         {/* Details */}
         <div>
           <p className="text-xs font-medium tracking-widest text-gold-dark uppercase mb-2">
-            {product.category === 'pendants' ? 'Pendant Light' : 'Wall Sconce'}
+            {product.category === 'tagines' ? 'Tagine' : product.category === 'ceramics' ? 'Ceramic' : product.category === 'glassware' ? 'Glassware' : 'Rug'}
           </p>
           <h1 className="font-serif text-3xl sm:text-4xl font-light text-charcoal">{product.name}</h1>
           <p className="mt-3 text-2xl text-charcoal">{formatPrice(product.price_usd)}</p>

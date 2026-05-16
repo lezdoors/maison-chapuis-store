@@ -11,10 +11,11 @@ const GROUPS: Group[] = [
     title: 'Maison',
     links: [
       { label: 'Shop All', to: '/shop' },
-      { label: 'Lighting', to: '/lighting' },
-      { label: 'Ceramics', to: '/ceramics' },
+      { label: 'Tagines', to: '/shop?cat=tagines' },
+      { label: 'Ceramics', to: '/shop?cat=ceramics' },
+      { label: 'Glassware', to: '/shop?cat=glassware' },
+      { label: 'Rugs', to: '/shop?cat=rugs' },
       { label: 'Our Story', to: '/story' },
-      { label: 'Journal', to: '/journal' },
     ],
   },
   {
