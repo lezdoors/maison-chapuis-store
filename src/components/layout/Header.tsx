@@ -5,9 +5,9 @@ import { useCart } from '@/contexts/CartContext'
 
 const navLinks = [
   { to: '/shop', label: 'Shop' },
-  { to: '/story', label: 'Our Story' },
-  { to: '/shipping', label: 'Shipping' },
-  { to: '/contact', label: 'Contact' },
+  { to: '/lighting', label: 'Lighting' },
+  { to: '/ceramics', label: 'Ceramics' },
+  { to: '/story', label: 'Story' },
 ]
 
 export default function Header() {
@@ -16,70 +16,119 @@ export default function Header() {
   const location = useLocation()
 
   return (
-    <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
-      <div className="container">
-        <div className="flex items-center justify-between h-16 sm:h-20">
-          {/* Mobile menu button */}
-          <button
-            onClick={() => setMobileOpen(!mobileOpen)}
-            className="sm:hidden p-2 -ml-2 text-foreground"
-            aria-label="Toggle menu"
+    <>
+      <a href="#main-content" className="skip-link">Skip to content</a>
+      <header
+        className="sticky top-0 z-50 bg-cream"
+        style={{ borderBottom: '1px solid var(--color-sand)' }}
+      >
+        <div className="container">
+          <div className="flex items-center justify-between h-16 sm:h-20">
+            {/* Mobile menu button */}
+            <button
+              onClick={() => setMobileOpen(!mobileOpen)}
+              className="sm:hidden p-2 -ml-2 text-ink"
+              aria-label="Toggle menu"
+            >
+              {mobileOpen ? <X size={22} /> : <Menu size={22} />}
+            </button>
+
+            {/* Wordmark */}
+            <Link to="/" className="flex items-center" aria-label="Maison Chapuis — home">
+              <span
+                className="font-serif text-ink"
+                style={{
+                  fontWeight: 400,
+                  fontSize: 'clamp(16px, 1.6vw, 20px)',
+                  letterSpacing: '0.15em',
+                  textTransform: 'uppercase',
+                }}
+              >
+                Maison Chapuis
+              </span>
+            </Link>
+
+            {/* Desktop nav */}
+            <nav className="hidden sm:flex items-center gap-10">
+              {navLinks.map(link => (
+                <Link
+                  key={link.to}
+                  to={link.to}
+                  className="transition-colors"
+                  style={{
+                    fontFamily: 'var(--font-sans)',
+                    fontWeight: 500,
+                    fontSize: 11,
+                    letterSpacing: '0.2em',
+                    textTransform: 'uppercase',
+                    color:
+                      location.pathname === link.to
+                        ? 'var(--color-ink)'
+                        : 'var(--color-muted)',
+                  }}
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </nav>
+
+            {/* Cart */}
+            <Link
+              to="/cart"
+              className="relative p-2 -mr-2 text-ink hover:text-gold-dark transition-colors"
+              aria-label={`Cart — ${itemCount} item${itemCount === 1 ? '' : 's'}`}
+            >
+              <ShoppingBag size={20} strokeWidth={1.5} />
+              {itemCount > 0 && (
+                <span
+                  className="absolute -top-0.5 -right-0.5 flex items-center justify-center"
+                  style={{
+                    background: 'var(--color-ink)',
+                    color: '#ffffff',
+                    fontFamily: 'var(--font-sans)',
+                    fontWeight: 600,
+                    fontSize: 10,
+                    width: 18,
+                    height: 18,
+                  }}
+                >
+                  {itemCount}
+                </span>
+              )}
+            </Link>
+          </div>
+        </div>
+
+        {/* Mobile nav */}
+        {mobileOpen && (
+          <nav
+            className="sm:hidden bg-cream px-4 py-4 space-y-1"
+            style={{ borderTop: '1px solid var(--color-sand)' }}
           >
-            {mobileOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
-
-          {/* Logo */}
-          <Link to="/" className="flex items-center gap-3">
-            <img src="/logo.png" alt="Maison Chapuis" className="h-9 w-9 rounded-full object-cover" />
-            <span className="font-serif text-xl sm:text-2xl font-semibold tracking-wide text-foreground">
-              MAISON CHAPUIS
-            </span>
-          </Link>
-
-          {/* Desktop nav */}
-          <nav className="hidden sm:flex items-center gap-8">
             {navLinks.map(link => (
               <Link
                 key={link.to}
                 to={link.to}
-                className={`text-sm font-medium tracking-wide transition-colors hover:text-gold-dark ${
-                  location.pathname === link.to ? 'text-gold-dark' : 'text-muted-foreground'
-                }`}
+                onClick={() => setMobileOpen(false)}
+                className="block py-3"
+                style={{
+                  fontFamily: 'var(--font-sans)',
+                  fontWeight: 500,
+                  fontSize: 12,
+                  letterSpacing: '0.2em',
+                  textTransform: 'uppercase',
+                  color:
+                    location.pathname === link.to
+                      ? 'var(--color-ink)'
+                      : 'var(--color-muted)',
+                }}
               >
                 {link.label}
               </Link>
             ))}
           </nav>
-
-          {/* Cart */}
-          <Link to="/cart" className="relative p-2 -mr-2 text-foreground hover:text-gold-dark transition-colors">
-            <ShoppingBag size={22} />
-            {itemCount > 0 && (
-              <span className="absolute -top-0.5 -right-0.5 bg-gold text-white text-[10px] font-semibold w-5 h-5 rounded-full flex items-center justify-center">
-                {itemCount}
-              </span>
-            )}
-          </Link>
-        </div>
-      </div>
-
-      {/* Mobile nav */}
-      {mobileOpen && (
-        <nav className="sm:hidden border-t border-border bg-background px-4 py-4 space-y-3">
-          {navLinks.map(link => (
-            <Link
-              key={link.to}
-              to={link.to}
-              onClick={() => setMobileOpen(false)}
-              className={`block text-base font-medium py-2 ${
-                location.pathname === link.to ? 'text-gold-dark' : 'text-muted-foreground'
-              }`}
-            >
-              {link.label}
-            </Link>
-          ))}
-        </nav>
-      )}
-    </header>
+        )}
+      </header>
+    </>
   )
 }
