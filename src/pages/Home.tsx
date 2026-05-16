@@ -1,13 +1,9 @@
 import HeroCarousel from '@/components/home/HeroCarousel'
-
-// =============================================================================
-// HANDOFF NOTE — see HANDOFF.md at repo root
-//
-// Section 1 (HeroCarousel) is fully built in src/components/home/HeroCarousel.tsx.
-// Sections 2–7 are scaffolded as placeholder elements below — each one needs a
-// real component built in src/components/home/ per the brief. Keep the section
-// IDs and the order as-is so the design rhythm holds.
-// =============================================================================
+import AtelierStrip from '@/components/home/AtelierStrip'
+import CampaignBanner from '@/components/home/CampaignBanner'
+import CategoryGrid from '@/components/home/CategoryGrid'
+import JournalCarousel from '@/components/home/JournalCarousel'
+import NewsletterStrip from '@/components/home/NewsletterStrip'
 
 export default function Home() {
   return (
@@ -15,16 +11,7 @@ export default function Home() {
       {/* Section 1 — FULL-BLEED HERO CAROUSEL */}
       <HeroCarousel />
 
-      {/* Section 2 — ATELIER STRIP (horizontal scroll-snap product spotlight)
-          TODO: build src/components/home/AtelierStrip.tsx
-          - Section bg #F5F1EB (var --color-cream-warm)
-          - Eyebrow "The Atelier" + h2 "Pieces from our Marrakech workshop"
-          - Horizontal scroll-snap, grid-auto-flow: column
-          - 6 product cards from products.filter(p => p.is_featured)
-            NOTE: products.ts currently has only 3 featured — broaden the
-            filter to slice(0,6) or set 3 more is_featured: true if intended
-          - Hover: primary→secondary image opacity crossfade (500ms)
-      */}
+      {/* Section 2 — ATELIER STRIP (horizontal scroll-snap product spotlight) */}
       <section
         id="atelier-strip"
         style={{
@@ -45,34 +32,54 @@ export default function Home() {
               margin: 0,
             }}
           >
-            Pieces from our Marrakech workshop
+            Pieces from our Marrakech workshop.
           </h2>
-          {/* TODO (other agent): horizontal scroll-snap strip here */}
-          <div style={{ marginTop: 48, color: 'var(--color-muted)', fontSize: 14 }}>
-            [Atelier strip — to be built per HANDOFF.md]
-          </div>
         </div>
+        <AtelierStrip />
       </section>
 
-      {/* Section 3 — CAMPAIGN BANNERS (3 stacked, alternating image/text)
-          TODO: build src/components/home/CampaignBanner.tsx and instantiate 3 times.
-          Themes: "Lighting from Marrakech" / "Ceramics — In the Kiln (Spring 2026)"
-                  / "Direct from the Workshop"
-          Alternation: image LEFT / image RIGHT / image LEFT
-          Each ~520px tall, 50/50 split, cream text side, outline CTA.
-      */}
+      {/* Section 3 — CAMPAIGN BANNERS (3 stacked, alternating image/text) */}
       <section id="campaign-banners">
-        {/* TODO: <CampaignBanner /> × 3 */}
+        <CampaignBanner
+          eyebrow="The Lighting"
+          heading="Lighting from Marrakech."
+          body="Three generations of metalwork in a single courtyard, hand-pierced one hole at a time. Every piece you buy keeps that courtyard lit."
+          ctaLabel="Shop Lighting"
+          ctaHref="/lighting"
+          image="/hero-tent.webp"
+          imageAlt="Brass lanterns lit at dusk in a Moroccan tent setting"
+          imageSide="left"
+        />
+        <CampaignBanner
+          eyebrow="The Ceramics"
+          heading="In the kiln."
+          body="Stoneware thrown in the workshops of Fes and finished in lead-free Moroccan pigment. The first pieces leave the kiln in Spring 2026."
+          ctaLabel="View Ceramics"
+          ctaHref="/ceramics"
+          image="/lifestyle-wall-sconce.jpg"
+          imageAlt="Hand-pierced brass wall sconce in soft daylight, suggesting the texture of forthcoming ceramic surfaces"
+          imageSide="right"
+        />
+        <CampaignBanner
+          eyebrow="The Workshop"
+          heading="Direct from the atelier."
+          body="No middlemen and no production runs. Every piece is signed and numbered by the maalem who shaped it."
+          ctaLabel="Our Story"
+          ctaHref="/story"
+          image="/lifestyle-teardrop-lit.jpg"
+          imageAlt="Lit brass pendant casting geometric shadows in a Moroccan interior"
+          imageSide="left"
+        />
       </section>
 
-      {/* Section 4 — CATEGORY GRID (4 tiles)
-          TODO: build src/components/home/CategoryGrid.tsx
-          - 4 tiles row desktop / 2×2 mobile
-          - Pendants (8) / Wall Sconces (2) / Ceramics (coming) / All Pieces
-          - Ceramics tile: render editorial "In the kiln · Stoneware. Spring 2026."
-            empty state, no broken images.
-      */}
-      <section id="category-grid" style={{ padding: 'clamp(64px, 8vw, 120px) 0' }}>
+      {/* Section 4 — CATEGORY GRID (4 tiles, Ceramics renders editorial empty state) */}
+      <section
+        id="category-grid"
+        style={{
+          padding: 'clamp(64px, 8vw, 120px) 0',
+          borderTop: '1px solid var(--color-sand)',
+        }}
+      >
         <div className="container">
           <p className="eyebrow" style={{ marginBottom: 12 }}>The Collection</p>
           <h2
@@ -80,23 +87,19 @@ export default function Home() {
               fontFamily: 'var(--font-serif)',
               fontWeight: 300,
               fontSize: 'clamp(28px, 3.4vw, 38px)',
+              lineHeight: 1.15,
+              letterSpacing: '-0.01em',
               maxWidth: 640,
               margin: 0,
             }}
           >
             Lighting, ceramics, and the workshop behind them.
           </h2>
-          {/* TODO (other agent): 4-tile category grid */}
+          <CategoryGrid />
         </div>
       </section>
 
-      {/* Section 5 — JOURNAL / EDITORIAL CAROUSEL
-          TODO: build src/components/home/JournalCarousel.tsx
-          - Horizontal scroll, 3 visible desktop
-          - aspect-[4/3] image + tag + Cormorant title + 2-line dek + date
-          - Stubs: "The Marrakech Brass Workshop" / "Pierce Patterns and Light"
-                   / "What is Fes-style Stoneware?"
-      */}
+      {/* Section 5 — JOURNAL / EDITORIAL CAROUSEL */}
       <section
         id="journal"
         style={{
@@ -111,28 +114,28 @@ export default function Home() {
               fontFamily: 'var(--font-serif)',
               fontWeight: 300,
               fontSize: 'clamp(28px, 3.4vw, 38px)',
+              lineHeight: 1.15,
+              letterSpacing: '-0.01em',
               maxWidth: 640,
               margin: 0,
             }}
           >
             Notes from the atelier.
           </h2>
-          {/* TODO (other agent): 3-card editorial carousel */}
         </div>
+        <JournalCarousel />
       </section>
 
-      {/* Section 6 — NEWSLETTER STRIP
-          TODO: build src/components/home/NewsletterStrip.tsx
-          - Cream bg, two-column
-          - Left: h2 "Stay in the workshop" + 1-sentence body
-          - Right: email input + square submit button
-      */}
-      <section id="newsletter" style={{ padding: 'clamp(64px, 8vw, 120px) 0' }}>
+      {/* Section 6 — NEWSLETTER STRIP (no-op form, client-side only) */}
+      <section
+        id="newsletter"
+        style={{
+          padding: 'clamp(64px, 8vw, 120px) 0',
+          borderTop: '1px solid var(--color-sand)',
+        }}
+      >
         <div className="container">
-          {/* TODO (other agent): newsletter form */}
-          <div style={{ color: 'var(--color-muted)', fontSize: 14 }}>
-            [Newsletter strip — to be built per HANDOFF.md]
-          </div>
+          <NewsletterStrip />
         </div>
       </section>
     </>
