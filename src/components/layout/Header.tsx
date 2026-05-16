@@ -399,7 +399,7 @@ export default function Header() {
                 { to: '/ceramics', label: 'Ceramics' },
                 { to: '/story', label: 'The Atelier' },
                 { to: '/journal', label: 'Journal' },
-                { to: '/shipping', label: 'Shipping &amp; Returns' },
+                { to: '/shipping', label: 'Shipping & Returns' },
                 { to: '/contact', label: 'Contact' },
               ].map((l) => (
                 <Link
