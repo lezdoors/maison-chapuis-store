@@ -1,8 +1,8 @@
 # Maison Chapuis — RB design pass HANDOFF
 
-Branch: `design/claude-rb-pass`
+This document was written on branch `design/claude-rb-pass`, which has been merged into `main`. **Branch your next PR off `main`, not off `design/claude-rb-pass`.** Use a name like `design/sections-2-6` or similar.
 
-This branch lays the **foundation** for the RB-register redesign. Sections 1 (Hero) and the global Header / Footer / theme tokens are fully built. Sections 2–6 of the Home page are scaffolded with TODO comments and need real components.
+The foundation pass laid Section 1 (Hero) and the global Header / Footer / theme tokens. Sections 2–6 of the Home page are scaffolded with TODO comments in `src/pages/Home.tsx` and need real components.
 
 The goal is **Roche-Bobois register** — editorial, cinematic, photography-led, restraint over decoration. The operational reference for proven UX patterns and copy register is **maisonizem.com** (our sister brand, same parent Akal Ltd).
 
