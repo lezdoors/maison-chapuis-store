@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef, useCallback } from 'react'
 import { Link } from 'react-router-dom'
+import { ChevronLeft, ChevronRight, Pause, Play } from 'lucide-react'
 
 interface Slide {
   image: string
@@ -39,35 +40,46 @@ const SLIDES: Slide[] = [
     ctaLabel: 'Read the Story',
     ctaHref: '/story',
   },
+  {
+    image: '/lifestyle-teardrop.jpg',
+    alt: 'Brass teardrop pendant in a softly lit Moroccan interior',
+    eyebrow: 'Editorial · Spring 2026',
+    heading: 'A house built around a workshop.',
+    subtitle: 'The first ceramics pieces leave the kiln in Fes this spring. Sign up to be notified.',
+    ctaLabel: 'Join the list',
+    ctaHref: '/waitlist',
+  },
 ]
 
 const ROTATE_MS = 7000
 
 export default function HeroCarousel() {
   const [active, setActive] = useState(0)
-  const [paused, setPaused] = useState(false)
+  const [hovered, setHovered] = useState(false)
+  const [userPaused, setUserPaused] = useState(false)
   const timerRef = useRef<number | null>(null)
+  const isPaused = hovered || userPaused
 
   const goTo = useCallback((i: number) => {
     setActive(((i % SLIDES.length) + SLIDES.length) % SLIDES.length)
   }, [])
 
   useEffect(() => {
-    if (paused) return
+    if (isPaused) return
     timerRef.current = window.setTimeout(() => {
       setActive((a) => (a + 1) % SLIDES.length)
     }, ROTATE_MS)
     return () => {
       if (timerRef.current) window.clearTimeout(timerRef.current)
     }
-  }, [active, paused])
+  }, [active, isPaused])
 
   return (
     <section
       aria-roledescription="carousel"
       aria-label="Maison Chapuis editorial hero"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
       style={{
         position: 'relative',
         width: '100%',
@@ -80,7 +92,7 @@ export default function HeroCarousel() {
         const isActive = i === active
         return (
           <div
-            key={slide.image}
+            key={slide.image + i}
             role="group"
             aria-roledescription="slide"
             aria-label={`${slide.eyebrow} — slide ${i + 1} of ${SLIDES.length}`}
@@ -93,7 +105,6 @@ export default function HeroCarousel() {
               pointerEvents: isActive ? 'auto' : 'none',
             }}
           >
-            {/* Image */}
             <img
               src={slide.image}
               alt={slide.alt}
@@ -107,7 +118,6 @@ export default function HeroCarousel() {
               loading={i === 0 ? 'eager' : 'lazy'}
               fetchPriority={i === 0 ? 'high' : 'auto'}
             />
-            {/* Gradient overlay — left-darker fading to transparent at 70% */}
             <div
               style={{
                 position: 'absolute',
@@ -116,7 +126,6 @@ export default function HeroCarousel() {
                   'linear-gradient(90deg, rgba(0,0,0,0.32) 0%, rgba(0,0,0,0) 70%)',
               }}
             />
-            {/* Text panel — bottom-left, max 560px */}
             <div
               style={{
                 position: 'absolute',
@@ -170,7 +179,84 @@ export default function HeroCarousel() {
         )
       })}
 
-      {/* Slide indicators — thin horizontal lines */}
+      {/* Prev / Next arrows — visible on hover */}
+      <button
+        type="button"
+        onClick={() => goTo(active - 1)}
+        aria-label="Previous slide"
+        style={{
+          position: 'absolute',
+          top: '50%',
+          left: 'clamp(8px, 2vw, 28px)',
+          transform: 'translateY(-50%)',
+          width: 44,
+          height: 44,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          background: 'rgba(0,0,0,0.25)',
+          color: '#ffffff',
+          border: '1px solid rgba(255,255,255,0.35)',
+          cursor: 'pointer',
+          opacity: hovered ? 1 : 0,
+          transition: 'opacity 0.3s ease, background 0.2s ease',
+          zIndex: 3,
+        }}
+      >
+        <ChevronLeft size={20} strokeWidth={1.5} />
+      </button>
+      <button
+        type="button"
+        onClick={() => goTo(active + 1)}
+        aria-label="Next slide"
+        style={{
+          position: 'absolute',
+          top: '50%',
+          right: 'clamp(8px, 2vw, 28px)',
+          transform: 'translateY(-50%)',
+          width: 44,
+          height: 44,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          background: 'rgba(0,0,0,0.25)',
+          color: '#ffffff',
+          border: '1px solid rgba(255,255,255,0.35)',
+          cursor: 'pointer',
+          opacity: hovered ? 1 : 0,
+          transition: 'opacity 0.3s ease, background 0.2s ease',
+          zIndex: 3,
+        }}
+      >
+        <ChevronRight size={20} strokeWidth={1.5} />
+      </button>
+
+      {/* Pause / Play toggle */}
+      <button
+        type="button"
+        onClick={() => setUserPaused((p) => !p)}
+        aria-label={userPaused ? 'Play carousel' : 'Pause carousel'}
+        aria-pressed={userPaused}
+        style={{
+          position: 'absolute',
+          right: 'clamp(16px, 3vw, 32px)',
+          bottom: 30,
+          width: 32,
+          height: 32,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          background: 'rgba(0,0,0,0.25)',
+          color: '#ffffff',
+          border: '1px solid rgba(255,255,255,0.35)',
+          cursor: 'pointer',
+          zIndex: 3,
+        }}
+      >
+        {userPaused ? <Play size={14} strokeWidth={1.5} /> : <Pause size={14} strokeWidth={1.5} />}
+      </button>
+
+      {/* Slide indicators */}
       <div
         style={{
           position: 'absolute',

@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 import { products } from '@/data/products'
 import { formatPrice } from '@/lib/utils'
 
-const featured = products.filter((p) => p.is_featured).slice(0, 6)
+const inStock = products.filter((p) => p.in_stock && !p.coming_soon)
 
 const categoryLabel = (category: string) =>
   category === 'pendants' ? 'Pendant' : category === 'wall-sconces' ? 'Wall Sconce' : 'Ceramic'
@@ -11,7 +11,7 @@ const categoryLabel = (category: string) =>
 export default function AtelierStrip() {
   return (
     <div
-      className="scroll-strip grid grid-flow-col auto-cols-[88vw] md:auto-cols-[32%] gap-4 overflow-x-auto"
+      className="scroll-strip grid grid-flow-col auto-cols-[84vw] md:auto-cols-[40%] lg:auto-cols-[28%] gap-4 overflow-x-auto"
       style={{
         marginTop: 'clamp(40px, 5vw, 64px)',
         scrollSnapType: 'x mandatory',
@@ -20,7 +20,7 @@ export default function AtelierStrip() {
         paddingBottom: 8,
       }}
     >
-      {featured.map((product, i) => {
+      {inStock.map((product, i) => {
         const primary = product.images[0]
         const secondary = product.images[1] || product.images[0]
         return (
@@ -29,7 +29,7 @@ export default function AtelierStrip() {
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.7, ease: 'easeOut', delay: i * 0.06 }}
+            transition={{ duration: 0.7, ease: 'easeOut', delay: Math.min(i, 6) * 0.05 }}
             style={{ scrollSnapAlign: 'start' }}
           >
             <Link
