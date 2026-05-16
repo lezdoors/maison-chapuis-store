@@ -2,26 +2,35 @@
 @import "tailwindcss";
 
 @theme {
-  /* Brand colors */
+  /* ============================================================
+     MAISON CHAPUIS — RB-REGISTER PALETTE
+     Editorial, photography-led, cinematic restraint.
+     ============================================================ */
+
+  /* Surfaces */
+  --color-cream: #FAF8F5;        /* page background */
+  --color-cream-warm: #F5F1EB;   /* atelier strip / alt section */
+  --color-cream-dark: #F0EBE3;   /* legacy alias, kept for footer text */
+  --color-sand: #E8DFD0;         /* hairline borders, dividers */
+
+  /* Ink */
+  --color-ink: #2C2C2C;          /* primary type & headlines */
+  --color-charcoal: #2C2C2C;     /* alias for footer */
+  --color-charcoal-light: #4A4A4A;
+  --color-muted: #6B6B6B;        /* secondary type */
+
+  /* Accent — restrained, eyebrows + rules only */
   --color-gold: #C5A455;
   --color-gold-light: #D4BA78;
   --color-gold-dark: #A68B3C;
-  --color-cream: #FAF8F5;
-  --color-cream-dark: #F0EBE3;
-  --color-sand: #E8DFD0;
-  --color-charcoal: #2C2C2C;
-  --color-charcoal-light: #4A4A4A;
-  --color-blue: #1E3A5F;
-  --color-blue-light: #2A4F7A;
 
-  /* shadcn-compatible semantic tokens */
+  /* shadcn-compatible semantic tokens (kept for Button etc.) */
   --color-background: #FAF8F5;
   --color-foreground: #2C2C2C;
-  --color-muted: #F0EBE3;
-  --color-muted-foreground: #4A4A4A;
-  --color-primary: #C5A455;
+  --color-muted-foreground: #6B6B6B;
+  --color-primary: #2C2C2C;
   --color-primary-foreground: #FFFFFF;
-  --color-secondary: #E8DFD0;
+  --color-secondary: #F5F1EB;
   --color-secondary-foreground: #2C2C2C;
   --color-accent: #F0EBE3;
   --color-accent-foreground: #2C2C2C;
@@ -29,33 +38,156 @@
   --color-destructive-foreground: #FFFFFF;
   --color-border: #E8DFD0;
   --color-input: #E8DFD0;
-  --color-ring: #C5A455;
+  --color-ring: #2C2C2C;
 
+  /* Type */
   --font-serif: 'Cormorant Garamond', Georgia, serif;
   --font-sans: 'Inter', system-ui, sans-serif;
 
-  --radius-sm: 0.25rem;
-  --radius-md: 0.375rem;
-  --radius-lg: 0.5rem;
-  --radius-xl: 0.75rem;
-  --radius-2xl: 1rem;
-  --radius-3xl: 1.5rem;
+  /* Radii — zeroed for RB-register hard-edge feel */
+  --radius-sm: 0;
+  --radius-md: 0;
+  --radius-lg: 0;
+  --radius-xl: 0;
+  --radius-2xl: 0;
+  --radius-3xl: 0;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 body {
   margin: 0;
   font-family: var(--font-sans);
-  color: var(--color-foreground);
-  background-color: var(--color-background);
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--color-ink);
+  background-color: var(--color-cream);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 h1, h2, h3, h4 {
   font-family: var(--font-serif);
+  font-weight: 300;
+  letter-spacing: -0.01em;
+  margin: 0;
 }
 
-/* Container utility */
+/* ============================================================
+   EDITORIAL UTILITIES
+   ============================================================ */
+
+.eyebrow {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.eyebrow-gold {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-gold-dark);
+}
+
+.cta-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 14px 32px;
+  background: transparent;
+  color: var(--color-ink);
+  border: 1px solid var(--color-ink);
+  transition: background .2s ease, color .2s ease;
+  cursor: pointer;
+}
+.cta-outline:hover {
+  background: var(--color-ink);
+  color: #ffffff;
+}
+
+.cta-outline-white {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 14px 32px;
+  background: transparent;
+  color: #ffffff;
+  border: 1px solid #ffffff;
+  transition: background .2s ease, color .2s ease;
+  cursor: pointer;
+}
+.cta-outline-white:hover {
+  background: #ffffff;
+  color: var(--color-ink);
+}
+
+.cta-solid {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 14px 32px;
+  background: var(--color-ink);
+  color: #ffffff;
+  border: 1px solid var(--color-ink);
+  transition: background .2s ease, color .2s ease;
+  cursor: pointer;
+}
+.cta-solid:hover {
+  background: #ffffff;
+  color: var(--color-ink);
+}
+
+/* Skip-to-content link (a11y) */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--color-ink);
+  color: #ffffff;
+  padding: 8px 16px;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  z-index: 1000;
+}
+.skip-link:focus {
+  top: 0;
+}
+
+/* Hide scrollbars on horizontal-scroll strips (keeps the swipe but removes the bar) */
+.scroll-strip {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.scroll-strip::-webkit-scrollbar {
+  display: none;
+}
+
+/* Container utility — match brief's content width */
 .container {
   width: 100%;
   max-width: 1280px;
