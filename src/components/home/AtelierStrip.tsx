@@ -6,14 +6,14 @@ import { formatPrice } from '@/lib/utils'
 const inStock = products.filter((p) => p.in_stock && !p.coming_soon)
 
 const categoryLabel = (category: string) =>
-  category === 'pendants' ? 'Pendant' : category === 'wall-sconces' ? 'Wall Sconce' : 'Ceramic'
+  category === 'pendants' ? 'Pendant' : category === 'wall-sconces' ? 'Wall sconce' : 'Ceramic'
 
 export default function AtelierStrip() {
   return (
     <div
-      className="scroll-strip grid grid-flow-col auto-cols-[84vw] md:auto-cols-[40%] lg:auto-cols-[28%] gap-4 overflow-x-auto"
+      className="scroll-strip grid grid-flow-col auto-cols-[82vw] md:auto-cols-[38%] lg:auto-cols-[24%] gap-2 overflow-x-auto"
       style={{
-        marginTop: 'clamp(40px, 5vw, 64px)',
+        marginTop: 'clamp(32px, 4vw, 56px)',
         scrollSnapType: 'x mandatory',
         paddingLeft: 'clamp(16px, 4vw, 32px)',
         paddingRight: 'clamp(16px, 4vw, 32px)',
@@ -26,23 +26,23 @@ export default function AtelierStrip() {
         return (
           <motion.div
             key={product.id}
-            initial={{ opacity: 0, y: 24 }}
+            initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.7, ease: 'easeOut', delay: Math.min(i, 6) * 0.05 }}
+            transition={{ duration: 0.6, ease: 'easeOut', delay: Math.min(i, 6) * 0.04 }}
             style={{ scrollSnapAlign: 'start' }}
           >
             <Link
               to={`/product/${product.slug}`}
               className="group"
-              style={{ display: 'block', textDecoration: 'none', color: 'inherit' }}
+              style={{ display: 'block', textDecoration: 'none', color: 'inherit', background: '#ffffff' }}
               aria-label={`${product.name} — ${categoryLabel(product.category)}, ${formatPrice(product.price_usd)}`}
             >
               <div
-                className="aspect-[4/5]"
+                className="aspect-square"
                 style={{
                   position: 'relative',
-                  background: 'var(--color-ink)',
+                  background: 'var(--color-bg-alt)',
                   overflow: 'hidden',
                 }}
               >
@@ -57,7 +57,7 @@ export default function AtelierStrip() {
                     width: '100%',
                     height: '100%',
                     objectFit: 'contain',
-                    padding: 'clamp(28px, 4vw, 40px)',
+                    padding: 'clamp(20px, 3vw, 32px)',
                     transition: 'opacity 500ms ease',
                   }}
                 />
@@ -73,17 +73,17 @@ export default function AtelierStrip() {
                     width: '100%',
                     height: '100%',
                     objectFit: 'contain',
-                    padding: 'clamp(28px, 4vw, 40px)',
+                    padding: 'clamp(20px, 3vw, 32px)',
                     opacity: 0,
                     transition: 'opacity 500ms ease',
                   }}
                 />
               </div>
-              <div style={{ background: '#FFFFFF', padding: '20px 24px 24px' }}>
+              <div style={{ padding: '16px 4px 24px' }}>
                 <p
                   style={{
                     fontFamily: 'var(--font-sans)',
-                    fontSize: 13,
+                    fontSize: 12,
                     color: 'var(--color-muted)',
                     margin: 0,
                   }}
@@ -92,12 +92,11 @@ export default function AtelierStrip() {
                 </p>
                 <h3
                   style={{
-                    fontFamily: 'var(--font-serif)',
-                    fontWeight: 300,
-                    fontSize: 22,
-                    lineHeight: 1.15,
+                    fontFamily: 'var(--font-sans)',
+                    fontWeight: 500,
+                    fontSize: 18,
+                    lineHeight: 1.2,
                     color: 'var(--color-ink)',
-                    letterSpacing: '-0.005em',
                     margin: '4px 0 8px',
                   }}
                 >
@@ -107,7 +106,7 @@ export default function AtelierStrip() {
                   style={{
                     fontFamily: 'var(--font-sans)',
                     fontWeight: 500,
-                    fontSize: 15,
+                    fontSize: 14,
                     color: 'var(--color-ink)',
                     margin: 0,
                   }}

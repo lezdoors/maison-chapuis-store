@@ -20,13 +20,13 @@ export default function NewsletterStrip() {
         </p>
         <h2
           style={{
-            fontFamily: 'var(--font-serif)',
-            fontWeight: 300,
-            fontSize: 'clamp(28px, 3.4vw, 38px)',
+            fontFamily: 'var(--font-sans)',
+            fontWeight: 600,
+            fontSize: 'clamp(26px, 3vw, 36px)',
             lineHeight: 1.1,
             letterSpacing: '-0.01em',
             color: 'var(--color-ink)',
-            margin: '0 0 16px 0',
+            margin: '0 0 14px 0',
             maxWidth: 440,
           }}
         >
@@ -54,17 +54,16 @@ export default function NewsletterStrip() {
             style={{
               borderTop: '1px solid var(--color-sand)',
               borderBottom: '1px solid var(--color-sand)',
-              padding: '28px 0',
+              padding: '24px 0',
             }}
           >
             <p
               style={{
-                fontFamily: 'var(--font-serif)',
-                fontWeight: 300,
-                fontSize: 22,
+                fontFamily: 'var(--font-sans)',
+                fontWeight: 500,
+                fontSize: 18,
                 color: 'var(--color-ink)',
                 margin: 0,
-                letterSpacing: '-0.005em',
               }}
             >
               Thank you — we&rsquo;ll be in touch.
@@ -109,16 +108,16 @@ export default function NewsletterStrip() {
                 background: 'transparent',
                 border: 0,
                 outline: 'none',
-                padding: '16px 0',
+                padding: '14px 0',
               }}
             />
             <button
               type="submit"
               style={{
                 fontFamily: 'var(--font-sans)',
-                fontWeight: 500,
+                fontWeight: 600,
                 fontSize: 12,
-                letterSpacing: '0.2em',
+                letterSpacing: '0.18em',
                 textTransform: 'uppercase',
                 color: 'var(--color-ink)',
                 background: 'transparent',

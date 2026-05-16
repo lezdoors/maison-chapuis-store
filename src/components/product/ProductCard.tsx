@@ -6,36 +6,111 @@ interface ProductCardProps {
   product: Product
 }
 
+const categoryLabel = (category: string) =>
+  category === 'pendants' ? 'Pendant' : category === 'wall-sconces' ? 'Wall sconce' : 'Ceramic'
+
 export default function ProductCard({ product }: ProductCardProps) {
   if (product.coming_soon) {
     return (
-      <div className="group">
-        <div className="aspect-square bg-sand/50 rounded-lg flex items-center justify-center">
-          <span className="text-charcoal-light font-serif text-lg italic">Coming Soon</span>
+      <div className="group" style={{ background: '#ffffff' }}>
+        <div
+          className="aspect-square"
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            background: 'var(--color-bg-alt)',
+          }}
+        >
+          <span
+            style={{
+              fontFamily: 'var(--font-sans)',
+              fontSize: 13,
+              letterSpacing: '0.22em',
+              textTransform: 'uppercase',
+              color: 'var(--color-muted)',
+            }}
+          >
+            Coming soon
+          </span>
         </div>
-        <div className="mt-4">
-          <h3 className="font-serif text-lg text-charcoal-light">{product.name}</h3>
+        <div style={{ padding: '16px 4px 0' }}>
+          <h3
+            style={{
+              fontFamily: 'var(--font-sans)',
+              fontWeight: 500,
+              fontSize: 16,
+              color: 'var(--color-muted)',
+              margin: 0,
+            }}
+          >
+            {product.name}
+          </h3>
         </div>
       </div>
     )
   }
 
   return (
-    <Link to={`/product/${product.slug}`} className="group block">
-      <div className="aspect-square bg-charcoal rounded-2xl overflow-hidden">
+    <Link
+      to={`/product/${product.slug}`}
+      className="group"
+      style={{ display: 'block', textDecoration: 'none', color: 'inherit', background: '#ffffff' }}
+    >
+      <div
+        className="aspect-square"
+        style={{ position: 'relative', background: 'var(--color-bg-alt)', overflow: 'hidden' }}
+      >
         <img
           src={product.images[0]}
           alt={product.name}
           loading="lazy"
-          className="w-full h-full object-contain p-8 group-hover:scale-110 transition-transform duration-500"
-          style={{ filter: 'drop-shadow(0 20px 40px rgba(197,164,85,0.3))' }}
+          style={{
+            position: 'absolute',
+            inset: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'contain',
+            padding: 'clamp(20px, 3vw, 32px)',
+            transition: 'transform 700ms ease',
+          }}
+          className="group-hover:scale-[1.03]"
         />
       </div>
-      <div className="mt-4">
-        <h3 className="font-serif text-lg text-charcoal group-hover:text-gold-dark transition-colors">
+      <div style={{ padding: '16px 4px 0' }}>
+        <p
+          style={{
+            fontFamily: 'var(--font-sans)',
+            fontSize: 12,
+            color: 'var(--color-muted)',
+            margin: 0,
+          }}
+        >
+          {categoryLabel(product.category)}
+        </p>
+        <h3
+          style={{
+            fontFamily: 'var(--font-sans)',
+            fontWeight: 500,
+            fontSize: 18,
+            lineHeight: 1.2,
+            color: 'var(--color-ink)',
+            margin: '4px 0 6px',
+          }}
+        >
           {product.name}
         </h3>
-        <p className="mt-1 text-sm text-charcoal-light">{formatPrice(product.price_usd)}</p>
+        <p
+          style={{
+            fontFamily: 'var(--font-sans)',
+            fontWeight: 500,
+            fontSize: 14,
+            color: 'var(--color-ink)',
+            margin: 0,
+          }}
+        >
+          {formatPrice(product.price_usd)}
+        </p>
       </div>
     </Link>
   )

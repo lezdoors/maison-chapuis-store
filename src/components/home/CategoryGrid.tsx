@@ -19,7 +19,7 @@ const TILES: Tile[] = [
     ariaLabel: 'Pendants — 8 pieces',
   },
   {
-    title: 'Wall Sconces',
+    title: 'Wall sconces',
     href: '/lighting?cat=sconces',
     image: '/products/etoile-de-fes.jpg',
     imageAlt: 'Étoile de Fès wall sconce — geometric pierced brass',
@@ -35,7 +35,7 @@ const TILES: Tile[] = [
     ariaLabel: 'Ceramics — coming Spring 2026',
   },
   {
-    title: 'All Pieces',
+    title: 'All pieces',
     href: '/shop',
     image: '/lifestyle-teardrop.jpg',
     imageAlt: 'Brass teardrop pendant in a Moroccan interior',
@@ -47,7 +47,7 @@ const TILES: Tile[] = [
 export default function CategoryGrid() {
   return (
     <div
-      className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6"
+      className="grid grid-cols-2 lg:grid-cols-4 gap-2 lg:gap-3"
       style={{ marginTop: 'clamp(32px, 4vw, 48px)' }}
     >
       {TILES.map((tile) => {
@@ -61,13 +61,11 @@ export default function CategoryGrid() {
             aria-label={tile.ariaLabel}
           >
             <div
-              className="aspect-[4/5]"
+              className="aspect-square"
               style={{
                 position: 'relative',
-                background: isCeramics ? 'var(--color-cream-warm)' : 'var(--color-ink)',
+                background: 'var(--color-bg-alt)',
                 overflow: 'hidden',
-                borderTop: isCeramics ? '1px solid var(--color-sand)' : 'none',
-                borderBottom: isCeramics ? '1px solid var(--color-sand)' : 'none',
               }}
             >
               {isCeramics ? (
@@ -88,13 +86,13 @@ export default function CategoryGrid() {
                   </p>
                   <h3
                     style={{
-                      fontFamily: 'var(--font-serif)',
-                      fontWeight: 300,
-                      fontSize: 'clamp(22px, 2.4vw, 30px)',
+                      fontFamily: 'var(--font-sans)',
+                      fontWeight: 600,
+                      fontSize: 'clamp(20px, 2.2vw, 28px)',
                       lineHeight: 1.1,
                       letterSpacing: '-0.01em',
                       color: 'var(--color-ink)',
-                      margin: '0 0 12px 0',
+                      margin: '0 0 10px 0',
                     }}
                   >
                     Stoneware.<br />Spring 2026.
@@ -104,7 +102,7 @@ export default function CategoryGrid() {
                       fontFamily: 'var(--font-sans)',
                       fontSize: 13,
                       color: 'var(--color-muted)',
-                      maxWidth: 220,
+                      maxWidth: 240,
                       margin: 0,
                     }}
                   >
@@ -141,9 +139,7 @@ export default function CategoryGrid() {
                 style={{
                   fontFamily: 'var(--font-sans)',
                   fontWeight: 500,
-                  fontSize: 13,
-                  letterSpacing: '0.15em',
-                  textTransform: 'uppercase',
+                  fontSize: 14,
                   color: 'var(--color-ink)',
                 }}
               >

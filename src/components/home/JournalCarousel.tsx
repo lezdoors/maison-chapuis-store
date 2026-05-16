@@ -39,9 +39,9 @@ const CARDS: JournalCard[] = [
 export default function JournalCarousel() {
   return (
     <div
-      className="scroll-strip grid grid-flow-col auto-cols-[86vw] md:auto-cols-[calc(33%-12px)] gap-6 overflow-x-auto"
+      className="scroll-strip grid grid-flow-col auto-cols-[86vw] md:auto-cols-[calc(33%-12px)] gap-4 overflow-x-auto"
       style={{
-        marginTop: 'clamp(40px, 5vw, 64px)',
+        marginTop: 'clamp(32px, 4vw, 56px)',
         scrollSnapType: 'x mandatory',
         paddingLeft: 'clamp(16px, 4vw, 32px)',
         paddingRight: 'clamp(16px, 4vw, 32px)',
@@ -51,17 +51,17 @@ export default function JournalCarousel() {
       {CARDS.map((card, i) => (
         <motion.article
           key={card.title}
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.7, ease: 'easeOut', delay: i * 0.08 }}
-          style={{ scrollSnapAlign: 'start' }}
+          transition={{ duration: 0.6, ease: 'easeOut', delay: i * 0.06 }}
+          style={{ scrollSnapAlign: 'start', background: '#ffffff' }}
         >
           <div
             className="aspect-[4/3]"
             style={{
               position: 'relative',
-              background: 'var(--color-ink)',
+              background: 'var(--color-bg-alt)',
               overflow: 'hidden',
             }}
           >
@@ -78,15 +78,15 @@ export default function JournalCarousel() {
               }}
             />
           </div>
-          <div style={{ paddingTop: 18 }}>
+          <div style={{ paddingTop: 16 }}>
             <p
               style={{
                 fontFamily: 'var(--font-sans)',
                 fontWeight: 500,
-                fontSize: 12,
-                letterSpacing: '0.2em',
+                fontSize: 11,
+                letterSpacing: '0.22em',
                 textTransform: 'uppercase',
-                color: 'var(--color-gold-dark)',
+                color: 'var(--color-muted)',
                 margin: 0,
               }}
             >
@@ -94,12 +94,11 @@ export default function JournalCarousel() {
             </p>
             <h3
               style={{
-                fontFamily: 'var(--font-serif)',
-                fontWeight: 300,
+                fontFamily: 'var(--font-sans)',
+                fontWeight: 500,
                 fontSize: 20,
                 lineHeight: 1.2,
                 color: 'var(--color-ink)',
-                letterSpacing: '-0.005em',
                 margin: '10px 0 8px',
                 maxWidth: '32ch',
               }}

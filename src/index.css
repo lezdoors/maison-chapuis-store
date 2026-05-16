@@ -1,50 +1,54 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 @import "tailwindcss";
 
 @theme {
   /* ============================================================
-     MAISON CHAPUIS — RB-REGISTER PALETTE
-     Editorial, photography-led, cinematic restraint.
+     MAISON CHAPUIS — RB-system palette
+     White surfaces, black ink, sans throughout, gold accent reserved.
      ============================================================ */
 
   /* Surfaces */
-  --color-cream: #FAF8F5;        /* page background */
-  --color-cream-warm: #F5F1EB;   /* atelier strip / alt section */
-  --color-cream-dark: #F0EBE3;   /* legacy alias, kept for footer text */
-  --color-sand: #E8DFD0;         /* hairline borders, dividers */
+  --color-bg: #FFFFFF;            /* page background — pure white */
+  --color-bg-alt: #F5F5F5;        /* product tiles, alt sections */
+  --color-bg-warm: #FAF8F5;       /* legacy cream alias, used sparingly */
+  --color-cream: #FFFFFF;         /* legacy alias — now white */
+  --color-cream-warm: #F5F5F5;    /* legacy alias — now light gray */
+  --color-cream-dark: #EEEEEE;
+  --color-sand: #E5E5E5;          /* hairline dividers */
 
   /* Ink */
-  --color-ink: #2C2C2C;          /* primary type & headlines */
-  --color-charcoal: #2C2C2C;     /* alias for footer */
+  --color-ink: #1A1A1A;           /* primary type — nearly black */
+  --color-charcoal: #1A1A1A;
   --color-charcoal-light: #4A4A4A;
-  --color-muted: #6B6B6B;        /* secondary type */
+  --color-muted: #6B6B6B;
 
-  /* Accent — restrained, eyebrows + rules only */
+  /* Accent — Chapuis gold, reserved for eyebrows / rules only */
   --color-gold: #C5A455;
   --color-gold-light: #D4BA78;
   --color-gold-dark: #A68B3C;
 
-  /* shadcn-compatible semantic tokens (kept for Button etc.) */
-  --color-background: #FAF8F5;
-  --color-foreground: #2C2C2C;
+  /* shadcn semantic tokens */
+  --color-background: #FFFFFF;
+  --color-foreground: #1A1A1A;
   --color-muted-foreground: #6B6B6B;
-  --color-primary: #2C2C2C;
+  --color-primary: #1A1A1A;
   --color-primary-foreground: #FFFFFF;
-  --color-secondary: #F5F1EB;
-  --color-secondary-foreground: #2C2C2C;
-  --color-accent: #F0EBE3;
-  --color-accent-foreground: #2C2C2C;
+  --color-secondary: #F5F5F5;
+  --color-secondary-foreground: #1A1A1A;
+  --color-accent: #F5F5F5;
+  --color-accent-foreground: #1A1A1A;
   --color-destructive: #DC2626;
   --color-destructive-foreground: #FFFFFF;
-  --color-border: #E8DFD0;
-  --color-input: #E8DFD0;
-  --color-ring: #2C2C2C;
+  --color-border: #E5E5E5;
+  --color-input: #E5E5E5;
+  --color-ring: #1A1A1A;
 
-  /* Type */
-  --font-serif: 'Cormorant Garamond', Georgia, serif;
-  --font-sans: 'Inter', system-ui, sans-serif;
+  /* Type — sans-serif system; legacy --font-serif kept as alias to Inter
+     so any historical `var(--font-serif)` reference still renders sans. */
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-serif: 'Inter', system-ui, -apple-system, sans-serif;
 
-  /* Radii — zeroed for RB-register hard-edge feel */
+  /* Radii zeroed */
   --radius-sm: 0;
   --radius-md: 0;
   --radius-lg: 0;
@@ -61,18 +65,18 @@ body {
   margin: 0;
   font-family: var(--font-sans);
   font-weight: 400;
-  font-size: 15px;
+  font-size: 14px;
   line-height: 1.55;
   color: var(--color-ink);
-  background-color: var(--color-cream);
+  background-color: var(--color-bg);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 h1, h2, h3, h4 {
-  font-family: var(--font-serif);
-  font-weight: 300;
-  letter-spacing: -0.01em;
+  font-family: var(--font-sans);
+  font-weight: 400;
+  letter-spacing: -0.005em;
   margin: 0;
 }
 
@@ -105,7 +109,7 @@ h1, h2, h3, h4 {
   font-family: var(--font-sans);
   font-weight: 500;
   font-size: 12px;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   padding: 14px 32px;
   background: transparent;
@@ -113,6 +117,7 @@ h1, h2, h3, h4 {
   border: 1px solid var(--color-ink);
   transition: background .2s ease, color .2s ease;
   cursor: pointer;
+  text-decoration: none;
 }
 .cta-outline:hover {
   background: var(--color-ink);
@@ -126,7 +131,7 @@ h1, h2, h3, h4 {
   font-family: var(--font-sans);
   font-weight: 500;
   font-size: 12px;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   padding: 14px 32px;
   background: transparent;
@@ -134,6 +139,7 @@ h1, h2, h3, h4 {
   border: 1px solid #ffffff;
   transition: background .2s ease, color .2s ease;
   cursor: pointer;
+  text-decoration: none;
 }
 .cta-outline-white:hover {
   background: #ffffff;
@@ -145,9 +151,9 @@ h1, h2, h3, h4 {
   align-items: center;
   justify-content: center;
   font-family: var(--font-sans);
-  font-weight: 600;
+  font-weight: 500;
   font-size: 12px;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   padding: 14px 32px;
   background: var(--color-ink);
@@ -155,6 +161,7 @@ h1, h2, h3, h4 {
   border: 1px solid var(--color-ink);
   transition: background .2s ease, color .2s ease;
   cursor: pointer;
+  text-decoration: none;
 }
 .cta-solid:hover {
   background: #ffffff;
@@ -178,7 +185,7 @@ h1, h2, h3, h4 {
   top: 0;
 }
 
-/* Hide scrollbars on horizontal-scroll strips (keeps the swipe but removes the bar) */
+/* Hide scrollbars on horizontal-scroll strips */
 .scroll-strip {
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -187,10 +194,10 @@ h1, h2, h3, h4 {
   display: none;
 }
 
-/* Container utility — match brief's content width */
+/* Container — match RB-style content width */
 .container {
   width: 100%;
-  max-width: 1280px;
+  max-width: 1440px;
   margin-left: auto;
   margin-right: auto;
   padding-left: 1rem;

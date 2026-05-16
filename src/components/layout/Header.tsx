@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { ShoppingBag, Menu, X, ChevronRight } from 'lucide-react'
+import { Menu, Search, ShoppingBag, Heart, User, MapPin, X, ChevronRight } from 'lucide-react'
 import { useCart } from '@/contexts/CartContext'
+import CountrySelector from './CountrySelector'
 
 interface NavLink {
   to: string
@@ -10,39 +11,35 @@ interface NavLink {
 }
 
 interface MegaPanel {
-  eyebrow: string
-  heading: string
   columns: { title: string; links: { to: string; label: string }[] }[]
   feature: { to: string; image: string; alt: string; eyebrow: string; title: string }
 }
 
-const NAV: NavLink[] = [
-  { to: '/shop', label: 'Shop' },
+const NAV_RIGHT: NavLink[] = [
   {
-    to: '/lighting',
-    label: 'Lighting',
+    to: '/shop',
+    label: 'Products',
     mega: {
-      eyebrow: 'Brass, pierced by hand',
-      heading: 'Lighting from Marrakech.',
       columns: [
         {
-          title: 'By form',
+          title: 'Lighting',
           links: [
             { to: '/lighting?cat=pendants', label: 'Pendants' },
             { to: '/lighting?cat=sconces', label: 'Wall Sconces' },
             { to: '/lighting?cat=lanterns', label: 'Lanterns' },
+            { to: '/lighting', label: 'All Lighting' },
           ],
         },
         {
-          title: 'By price',
+          title: 'Ceramics',
           links: [
-            { to: '/lighting?price=under-500', label: 'Under $500' },
-            { to: '/lighting?price=500-1000', label: '$500 — $1,000' },
-            { to: '/lighting?price=over-1000', label: 'Over $1,000' },
+            { to: '/ceramics', label: 'Tableware' },
+            { to: '/ceramics', label: 'Vessels' },
+            { to: '/ceramics', label: 'Spring 2026 preview' },
           ],
         },
         {
-          title: 'The workshop',
+          title: 'The Atelier',
           links: [
             { to: '/story', label: 'Our maalems' },
             { to: '/story#materials', label: 'Brass and patina' },
@@ -59,13 +56,13 @@ const NAV: NavLink[] = [
       },
     },
   },
-  { to: '/ceramics', label: 'Ceramics' },
-  { to: '/story', label: 'Story' },
+  { to: '/story', label: 'Atelier' },
 ]
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const [activeMega, setActiveMega] = useState<string | null>(null)
+  const [searchOpen, setSearchOpen] = useState(false)
   const { itemCount } = useCart()
   const location = useLocation()
 
@@ -73,41 +70,168 @@ export default function Header() {
     <>
       <a href="#main-content" className="skip-link">Skip to content</a>
       <header
-        className="sticky top-0 z-50 bg-cream"
-        style={{ borderBottom: '1px solid var(--color-sand)' }}
+        className="sticky top-0 z-50"
+        style={{ background: '#ffffff', borderBottom: '1px solid var(--color-sand)' }}
         onMouseLeave={() => setActiveMega(null)}
       >
-        <div className="container">
-          <div className="flex items-center justify-between h-16 sm:h-20">
-            {/* Mobile menu button */}
-            <button
-              onClick={() => setMobileOpen(!mobileOpen)}
-              className="sm:hidden p-2 -ml-2 text-ink"
-              aria-label="Toggle menu"
+        {/* Utility row — slim, right-aligned icons + region selector */}
+        <div
+          className="hidden sm:block"
+          style={{ borderBottom: '1px solid var(--color-sand)' }}
+        >
+          <div className="container">
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'flex-end',
+                gap: 18,
+                minHeight: 36,
+              }}
             >
-              {mobileOpen ? <X size={22} /> : <Menu size={22} />}
-            </button>
+              <CountrySelector />
+              <span aria-hidden style={{ height: 14, width: 1, background: 'var(--color-sand)' }} />
+              <UtilityIcon to="/shipping" label="Find a showroom"><MapPin size={16} strokeWidth={1.5} /></UtilityIcon>
+              <UtilityIcon to="/cart" label={`Cart — ${itemCount} item${itemCount === 1 ? '' : 's'}`}>
+                <span style={{ position: 'relative', display: 'inline-flex' }}>
+                  <ShoppingBag size={16} strokeWidth={1.5} />
+                  {itemCount > 0 && (
+                    <span
+                      aria-hidden
+                      style={{
+                        position: 'absolute',
+                        top: -6,
+                        right: -8,
+                        minWidth: 14,
+                        height: 14,
+                        padding: '0 3px',
+                        background: 'var(--color-ink)',
+                        color: '#fff',
+                        fontSize: 9,
+                        fontWeight: 600,
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                      }}
+                    >
+                      {itemCount}
+                    </span>
+                  )}
+                </span>
+              </UtilityIcon>
+              <UtilityIcon to="/wishlist" label="Wishlist"><Heart size={16} strokeWidth={1.5} /></UtilityIcon>
+              <UtilityIcon to="/account" label="Account"><User size={16} strokeWidth={1.5} /></UtilityIcon>
+            </div>
+          </div>
+        </div>
 
-            {/* Wordmark */}
-            <Link to="/" className="flex items-center" aria-label="Maison Chapuis — home">
-              <span
-                className="font-serif text-ink"
+        {/* Main row — MENU/SEARCH left · wordmark centered · PRODUCTS/ATELIER right */}
+        <div className="container">
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: '1fr auto 1fr',
+              alignItems: 'center',
+              minHeight: 'clamp(60px, 7vw, 84px)',
+              gap: 16,
+            }}
+          >
+            {/* Left actions */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: 24 }}>
+              <button
+                onClick={() => setMobileOpen(true)}
+                aria-label="Open menu"
                 style={{
-                  fontWeight: 400,
-                  fontSize: 'clamp(16px, 1.6vw, 20px)',
-                  letterSpacing: '0.15em',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: 8,
+                  background: 'transparent',
+                  border: 0,
+                  padding: 0,
+                  cursor: 'pointer',
+                  color: 'var(--color-ink)',
+                  fontFamily: 'var(--font-sans)',
+                  fontWeight: 600,
+                  fontSize: 12,
+                  letterSpacing: '0.18em',
                   textTransform: 'uppercase',
                 }}
               >
-                Maison Chapuis
+                <Menu size={20} strokeWidth={1.75} />
+                <span className="hidden lg:inline">Menu</span>
+              </button>
+              <button
+                onClick={() => setSearchOpen((s) => !s)}
+                aria-label="Open search"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: 8,
+                  background: 'transparent',
+                  border: 0,
+                  padding: 0,
+                  cursor: 'pointer',
+                  color: 'var(--color-ink)',
+                  fontFamily: 'var(--font-sans)',
+                  fontWeight: 600,
+                  fontSize: 12,
+                  letterSpacing: '0.18em',
+                  textTransform: 'uppercase',
+                }}
+              >
+                <Search size={20} strokeWidth={1.75} />
+                <span className="hidden lg:inline">Search</span>
+              </button>
+            </div>
+
+            {/* Wordmark — centered */}
+            <Link
+              to="/"
+              aria-label="Maison Chapuis — home"
+              style={{
+                display: 'inline-flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                lineHeight: 1,
+                textDecoration: 'none',
+                color: 'var(--color-ink)',
+              }}
+            >
+              <span
+                style={{
+                  fontFamily: 'var(--font-sans)',
+                  fontWeight: 700,
+                  fontSize: 'clamp(20px, 2vw, 26px)',
+                  letterSpacing: '-0.005em',
+                  textTransform: 'lowercase',
+                }}
+              >
+                maison<span style={{ fontWeight: 400 }}>chapuis</span>
+              </span>
+              <span
+                style={{
+                  fontFamily: 'var(--font-sans)',
+                  fontWeight: 500,
+                  fontSize: 9,
+                  letterSpacing: '0.32em',
+                  textTransform: 'uppercase',
+                  color: 'var(--color-muted)',
+                  marginTop: 2,
+                }}
+              >
+                Marrakech
               </span>
             </Link>
 
-            {/* Desktop nav */}
-            <nav className="hidden sm:flex items-center gap-10" aria-label="Primary">
-              {NAV.map((link) => (
+            {/* Right nav */}
+            <nav
+              className="hidden sm:flex"
+              style={{ justifyContent: 'flex-end', alignItems: 'center', gap: 36 }}
+              aria-label="Primary"
+            >
+              {NAV_RIGHT.map((link) => (
                 <div
-                  key={link.to}
+                  key={link.label}
                   onMouseEnter={() => link.mega && setActiveMega(link.label)}
                   style={{ position: 'static' }}
                 >
@@ -122,14 +246,12 @@ export default function Header() {
                     }}
                     style={{
                       fontFamily: 'var(--font-sans)',
-                      fontWeight: 500,
-                      fontSize: 11,
-                      letterSpacing: '0.2em',
+                      fontWeight: 600,
+                      fontSize: 12,
+                      letterSpacing: '0.18em',
                       textTransform: 'uppercase',
-                      color:
-                        location.pathname === link.to || activeMega === link.label
-                          ? 'var(--color-ink)'
-                          : 'var(--color-muted)',
+                      color: 'var(--color-ink)',
+                      textDecoration: 'none',
                       paddingBlock: 8,
                     }}
                   >
@@ -139,24 +261,35 @@ export default function Header() {
               ))}
             </nav>
 
-            {/* Cart */}
+            {/* Mobile-only cart pin (right) */}
             <Link
               to="/cart"
-              className="relative p-2 -mr-2 text-ink transition-colors"
+              className="sm:hidden"
               aria-label={`Cart — ${itemCount} item${itemCount === 1 ? '' : 's'}`}
+              style={{
+                gridColumnStart: 3,
+                justifySelf: 'end',
+                color: 'var(--color-ink)',
+                position: 'relative',
+              }}
             >
-              <ShoppingBag size={20} strokeWidth={1.5} />
+              <ShoppingBag size={20} strokeWidth={1.75} />
               {itemCount > 0 && (
                 <span
-                  className="absolute -top-0.5 -right-0.5 flex items-center justify-center"
                   style={{
+                    position: 'absolute',
+                    top: -4,
+                    right: -6,
+                    minWidth: 14,
+                    height: 14,
+                    padding: '0 3px',
                     background: 'var(--color-ink)',
-                    color: '#ffffff',
-                    fontFamily: 'var(--font-sans)',
+                    color: '#fff',
+                    fontSize: 9,
                     fontWeight: 600,
-                    fontSize: 10,
-                    width: 18,
-                    height: 18,
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
                   }}
                 >
                   {itemCount}
@@ -166,47 +299,165 @@ export default function Header() {
           </div>
         </div>
 
+        {/* Search drawer */}
+        {searchOpen && (
+          <div
+            style={{
+              borderTop: '1px solid var(--color-sand)',
+              background: '#ffffff',
+            }}
+          >
+            <div className="container" style={{ paddingTop: 14, paddingBottom: 14 }}>
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault()
+                  setSearchOpen(false)
+                }}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 12,
+                  borderBottom: '1px solid var(--color-ink)',
+                  paddingBottom: 6,
+                }}
+              >
+                <Search size={18} strokeWidth={1.5} style={{ color: 'var(--color-muted)' }} />
+                <input
+                  autoFocus
+                  placeholder="Search pendants, ceramics, journal…"
+                  style={{
+                    flex: 1,
+                    border: 0,
+                    outline: 'none',
+                    fontFamily: 'var(--font-sans)',
+                    fontSize: 16,
+                    color: 'var(--color-ink)',
+                    background: 'transparent',
+                    padding: '6px 0',
+                  }}
+                />
+                <button
+                  type="button"
+                  onClick={() => setSearchOpen(false)}
+                  aria-label="Close search"
+                  style={{ background: 'transparent', border: 0, cursor: 'pointer', color: 'var(--color-muted)' }}
+                >
+                  <X size={18} strokeWidth={1.5} />
+                </button>
+              </form>
+            </div>
+          </div>
+        )}
+
         {/* Mega-menu panel */}
         {activeMega &&
-          NAV.find((n) => n.label === activeMega)?.mega && (
+          NAV_RIGHT.find((n) => n.label === activeMega)?.mega && (
             <MegaMenuPanel
-              panel={NAV.find((n) => n.label === activeMega)!.mega!}
+              panel={NAV_RIGHT.find((n) => n.label === activeMega)!.mega!}
               onClose={() => setActiveMega(null)}
             />
           )}
-
-        {/* Mobile nav */}
-        {mobileOpen && (
-          <nav
-            className="sm:hidden bg-cream px-4 py-4 space-y-1"
-            style={{ borderTop: '1px solid var(--color-sand)' }}
-            aria-label="Mobile"
-          >
-            {NAV.map((link) => (
-              <Link
-                key={link.to}
-                to={link.to}
-                onClick={() => setMobileOpen(false)}
-                className="block py-3"
-                style={{
-                  fontFamily: 'var(--font-sans)',
-                  fontWeight: 500,
-                  fontSize: 12,
-                  letterSpacing: '0.2em',
-                  textTransform: 'uppercase',
-                  color:
-                    location.pathname === link.to
-                      ? 'var(--color-ink)'
-                      : 'var(--color-muted)',
-                }}
-              >
-                {link.label}
-              </Link>
-            ))}
-          </nav>
-        )}
       </header>
+
+      {/* Mobile menu drawer — full-screen overlay */}
+      {mobileOpen && (
+        <div
+          className="sm:hidden"
+          style={{
+            position: 'fixed',
+            inset: 0,
+            background: '#ffffff',
+            zIndex: 100,
+            display: 'flex',
+            flexDirection: 'column',
+          }}
+        >
+          <div className="container">
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                paddingTop: 16,
+                paddingBottom: 16,
+                borderBottom: '1px solid var(--color-sand)',
+              }}
+            >
+              <span className="eyebrow">Menu</span>
+              <button
+                onClick={() => setMobileOpen(false)}
+                aria-label="Close menu"
+                style={{ background: 'transparent', border: 0, cursor: 'pointer', color: 'var(--color-ink)' }}
+              >
+                <X size={22} strokeWidth={1.5} />
+              </button>
+            </div>
+            <nav style={{ paddingTop: 24, display: 'flex', flexDirection: 'column', gap: 4 }}>
+              {[
+                { to: '/shop', label: 'All Products' },
+                { to: '/lighting', label: 'Lighting' },
+                { to: '/ceramics', label: 'Ceramics' },
+                { to: '/story', label: 'The Atelier' },
+                { to: '/journal', label: 'Journal' },
+                { to: '/shipping', label: 'Shipping &amp; Returns' },
+                { to: '/contact', label: 'Contact' },
+              ].map((l) => (
+                <Link
+                  key={l.to + l.label}
+                  to={l.to}
+                  onClick={() => setMobileOpen(false)}
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    padding: '16px 0',
+                    borderBottom: '1px solid var(--color-sand)',
+                    fontFamily: 'var(--font-sans)',
+                    fontWeight: 500,
+                    fontSize: 16,
+                    color:
+                      location.pathname === l.to ? 'var(--color-ink)' : 'var(--color-ink)',
+                    textDecoration: 'none',
+                  }}
+                >
+                  <span>{l.label}</span>
+                  <ChevronRight size={16} strokeWidth={1.5} />
+                </Link>
+              ))}
+            </nav>
+          </div>
+        </div>
+      )}
     </>
+  )
+}
+
+function UtilityIcon({
+  to,
+  label,
+  children,
+}: {
+  to: string
+  label: string
+  children: React.ReactNode
+}) {
+  return (
+    <Link
+      to={to}
+      aria-label={label}
+      style={{
+        display: 'inline-flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        color: 'var(--color-ink)',
+        opacity: 0.85,
+        transition: 'opacity .15s ease',
+      }}
+      onMouseEnter={(e) => ((e.currentTarget as HTMLAnchorElement).style.opacity = '1')}
+      onMouseLeave={(e) => ((e.currentTarget as HTMLAnchorElement).style.opacity = '0.85')}
+    >
+      {children}
+    </Link>
   )
 }
 
@@ -220,7 +471,7 @@ function MegaMenuPanel({ panel, onClose }: { panel: MegaPanel; onClose: () => vo
         left: 0,
         right: 0,
         top: '100%',
-        background: 'var(--color-cream)',
+        background: '#ffffff',
         borderTop: '1px solid var(--color-sand)',
         borderBottom: '1px solid var(--color-sand)',
       }}
@@ -237,15 +488,12 @@ function MegaMenuPanel({ panel, onClose }: { panel: MegaPanel; onClose: () => vo
           <div style={{ gridColumn: 'span 3', display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 32 }}>
             {panel.columns.map((col) => (
               <div key={col.title}>
-                <h4
-                  className="eyebrow"
-                  style={{ color: 'var(--color-muted)', marginBottom: 16 }}
-                >
+                <h4 className="eyebrow" style={{ color: 'var(--color-muted)', marginBottom: 16 }}>
                   {col.title}
                 </h4>
                 <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 10 }}>
                   {col.links.map((l) => (
-                    <li key={l.to}>
+                    <li key={l.to + l.label}>
                       <Link
                         to={l.to}
                         style={{
@@ -269,7 +517,7 @@ function MegaMenuPanel({ panel, onClose }: { panel: MegaPanel; onClose: () => vo
           >
             <div
               className="aspect-[4/5]"
-              style={{ position: 'relative', background: 'var(--color-ink)', overflow: 'hidden' }}
+              style={{ position: 'relative', background: 'var(--color-bg-alt)', overflow: 'hidden' }}
             >
               <img
                 src={panel.feature.image}
@@ -285,17 +533,14 @@ function MegaMenuPanel({ panel, onClose }: { panel: MegaPanel; onClose: () => vo
                 }}
               />
             </div>
-            <p
-              className="eyebrow-gold"
-              style={{ margin: '14px 0 4px 0' }}
-            >
+            <p className="eyebrow-gold" style={{ margin: '14px 0 4px 0' }}>
               {panel.feature.eyebrow}
             </p>
             <p
               style={{
-                fontFamily: 'var(--font-serif)',
-                fontWeight: 300,
-                fontSize: 20,
+                fontFamily: 'var(--font-sans)',
+                fontWeight: 500,
+                fontSize: 16,
                 color: 'var(--color-ink)',
                 margin: 0,
                 display: 'inline-flex',

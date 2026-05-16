@@ -16,36 +16,36 @@ const SLIDES: Slide[] = [
   {
     image: '/hero-tent.webp',
     alt: 'Hand-pierced brass lanterns illuminating a Moroccan tent at dusk',
-    eyebrow: 'The Lighting',
-    heading: 'Brass, pierced by hand.',
+    eyebrow: 'Spring Editorial 2026',
+    heading: 'BRASS, BY HAND.',
     subtitle: 'Pendants and sconces shaped one piece at a time, in the workshops of Marrakech.',
-    ctaLabel: 'Shop Lighting',
+    ctaLabel: 'Discover the lighting',
     ctaHref: '/lighting',
   },
   {
     image: '/lifestyle-teardrop-lit.jpg',
     alt: 'Lit brass pendant casting geometric shadows across a plaster wall',
     eyebrow: 'The Atelier',
-    heading: 'Made in Marrakech.',
+    heading: 'MADE IN MARRAKECH.',
     subtitle: 'Direct from the workshop. No middlemen. Each piece signed by its maker.',
-    ctaLabel: 'Shop the Atelier',
+    ctaLabel: 'Shop the atelier',
     ctaHref: '/shop',
   },
   {
     image: '/lifestyle-wall-sconce.jpg',
     alt: 'Brass wall sconce against a textured plaster wall in soft daylight',
     eyebrow: 'The Story',
-    heading: 'From workshop to home.',
+    heading: 'A HOUSE BUILT AROUND A WORKSHOP.',
     subtitle: 'A family-run atelier, three generations of metalwork, brought to the United States.',
-    ctaLabel: 'Read the Story',
+    ctaLabel: 'Read the story',
     ctaHref: '/story',
   },
   {
     image: '/lifestyle-teardrop.jpg',
     alt: 'Brass teardrop pendant in a softly lit Moroccan interior',
-    eyebrow: 'Editorial · Spring 2026',
-    heading: 'A house built around a workshop.',
-    subtitle: 'The first ceramics pieces leave the kiln in Fes this spring. Sign up to be notified.',
+    eyebrow: 'Coming Spring 2026',
+    heading: 'CERAMICS — IN THE KILN.',
+    subtitle: 'The first stoneware leaves the kiln this spring. Join the list for early access.',
     ctaLabel: 'Join the list',
     ctaHref: '/waitlist',
   },
@@ -83,9 +83,9 @@ export default function HeroCarousel() {
       style={{
         position: 'relative',
         width: '100%',
-        height: 'clamp(520px, 78vh, 860px)',
+        height: 'clamp(560px, 82vh, 920px)',
         overflow: 'hidden',
-        background: 'var(--color-ink)',
+        background: 'var(--color-bg-alt)',
       }}
     >
       {SLIDES.map((slide, i) => {
@@ -118,68 +118,75 @@ export default function HeroCarousel() {
               loading={i === 0 ? 'eager' : 'lazy'}
               fetchPriority={i === 0 ? 'high' : 'auto'}
             />
+            {/* Center overlay text — bold sans display */}
             <div
               style={{
                 position: 'absolute',
                 inset: 0,
-                background:
-                  'linear-gradient(90deg, rgba(0,0,0,0.32) 0%, rgba(0,0,0,0) 70%)',
-              }}
-            />
-            <div
-              style={{
-                position: 'absolute',
-                left: 'clamp(20px, 5vw, 64px)',
-                bottom: 'clamp(80px, 12vh, 140px)',
-                maxWidth: 560,
-                color: '#ffffff',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                padding: 'clamp(24px, 5vw, 64px)',
+                pointerEvents: 'none',
               }}
             >
-              <p
+              <div
                 style={{
-                  fontFamily: 'var(--font-sans)',
-                  fontWeight: 500,
-                  fontSize: 11,
-                  letterSpacing: '0.18em',
-                  textTransform: 'uppercase',
-                  color: 'rgba(255,255,255,0.85)',
-                  margin: '0 0 18px 0',
+                  maxWidth: 920,
+                  textAlign: 'center',
+                  color: '#ffffff',
+                  textShadow: '0 2px 24px rgba(0,0,0,0.32)',
+                  pointerEvents: 'auto',
                 }}
               >
-                {slide.eyebrow}
-              </p>
-              <h1
-                style={{
-                  fontFamily: 'var(--font-serif)',
-                  fontWeight: 300,
-                  fontSize: 'clamp(40px, 5.4vw, 72px)',
-                  lineHeight: 1.02,
-                  letterSpacing: '-0.01em',
-                  margin: '0 0 18px 0',
-                }}
-              >
-                {slide.heading}
-              </h1>
-              <p
-                style={{
-                  fontSize: 15,
-                  lineHeight: 1.55,
-                  color: 'rgba(255,255,255,0.85)',
-                  maxWidth: 440,
-                  margin: '0 0 28px 0',
-                }}
-              >
-                {slide.subtitle}
-              </p>
-              <Link to={slide.ctaHref} className="cta-outline-white" tabIndex={isActive ? 0 : -1}>
-                {slide.ctaLabel}
-              </Link>
+                <p
+                  style={{
+                    fontFamily: 'var(--font-sans)',
+                    fontWeight: 500,
+                    fontSize: 11,
+                    letterSpacing: '0.32em',
+                    textTransform: 'uppercase',
+                    color: 'rgba(255,255,255,0.92)',
+                    margin: '0 0 22px 0',
+                  }}
+                >
+                  {slide.eyebrow}
+                </p>
+                <h1
+                  style={{
+                    fontFamily: 'var(--font-sans)',
+                    fontWeight: 700,
+                    fontSize: 'clamp(40px, 6.4vw, 96px)',
+                    lineHeight: 1.02,
+                    letterSpacing: '-0.02em',
+                    margin: '0 0 24px 0',
+                  }}
+                >
+                  {slide.heading}
+                </h1>
+                <p
+                  style={{
+                    fontFamily: 'var(--font-sans)',
+                    fontWeight: 400,
+                    fontSize: 15,
+                    lineHeight: 1.55,
+                    color: 'rgba(255,255,255,0.92)',
+                    maxWidth: 560,
+                    margin: '0 auto 36px',
+                  }}
+                >
+                  {slide.subtitle}
+                </p>
+                <Link to={slide.ctaHref} className="cta-outline-white" tabIndex={isActive ? 0 : -1}>
+                  {slide.ctaLabel}
+                </Link>
+              </div>
             </div>
           </div>
         )
       })}
 
-      {/* Prev / Next arrows — visible on hover */}
+      {/* Prev / Next arrows */}
       <button
         type="button"
         onClick={() => goTo(active - 1)}
@@ -194,7 +201,7 @@ export default function HeroCarousel() {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          background: 'rgba(0,0,0,0.25)',
+          background: 'rgba(0,0,0,0.18)',
           color: '#ffffff',
           border: '1px solid rgba(255,255,255,0.35)',
           cursor: 'pointer',
@@ -219,7 +226,7 @@ export default function HeroCarousel() {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          background: 'rgba(0,0,0,0.25)',
+          background: 'rgba(0,0,0,0.18)',
           color: '#ffffff',
           border: '1px solid rgba(255,255,255,0.35)',
           cursor: 'pointer',
@@ -231,63 +238,49 @@ export default function HeroCarousel() {
         <ChevronRight size={20} strokeWidth={1.5} />
       </button>
 
-      {/* Pause / Play toggle */}
-      <button
-        type="button"
-        onClick={() => setUserPaused((p) => !p)}
-        aria-label={userPaused ? 'Play carousel' : 'Pause carousel'}
-        aria-pressed={userPaused}
-        style={{
-          position: 'absolute',
-          right: 'clamp(16px, 3vw, 32px)',
-          bottom: 30,
-          width: 32,
-          height: 32,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          background: 'rgba(0,0,0,0.25)',
-          color: '#ffffff',
-          border: '1px solid rgba(255,255,255,0.35)',
-          cursor: 'pointer',
-          zIndex: 3,
-        }}
-      >
-        {userPaused ? <Play size={14} strokeWidth={1.5} /> : <Pause size={14} strokeWidth={1.5} />}
-      </button>
-
-      {/* Slide indicators */}
+      {/* Pause / Play toggle + slide counter — bottom-left */}
       <div
         style={{
           position: 'absolute',
-          left: '50%',
-          bottom: 36,
-          transform: 'translateX(-50%)',
+          left: 'clamp(16px, 3vw, 32px)',
+          bottom: 'clamp(20px, 3vw, 32px)',
           display: 'flex',
-          gap: 8,
-          zIndex: 2,
+          alignItems: 'center',
+          gap: 14,
+          zIndex: 3,
         }}
-        role="tablist"
-        aria-label="Carousel slides"
       >
-        {SLIDES.map((_, i) => (
-          <button
-            key={i}
-            onClick={() => goTo(i)}
-            role="tab"
-            aria-selected={i === active}
-            aria-label={`Go to slide ${i + 1}`}
-            style={{
-              width: i === active ? 40 : 24,
-              height: 2,
-              background: i === active ? '#ffffff' : 'rgba(255,255,255,0.45)',
-              border: 0,
-              padding: 0,
-              cursor: 'pointer',
-              transition: 'width 0.3s ease, background 0.3s ease',
-            }}
-          />
-        ))}
+        <button
+          type="button"
+          onClick={() => setUserPaused((p) => !p)}
+          aria-label={userPaused ? 'Play carousel' : 'Pause carousel'}
+          aria-pressed={userPaused}
+          style={{
+            width: 36,
+            height: 36,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            background: 'rgba(0,0,0,0.18)',
+            color: '#ffffff',
+            border: '1px solid rgba(255,255,255,0.5)',
+            cursor: 'pointer',
+          }}
+        >
+          {userPaused ? <Play size={14} strokeWidth={1.75} /> : <Pause size={14} strokeWidth={1.75} />}
+        </button>
+        <span
+          style={{
+            fontFamily: 'var(--font-sans)',
+            fontWeight: 500,
+            fontSize: 11,
+            letterSpacing: '0.22em',
+            color: '#ffffff',
+            opacity: 0.85,
+          }}
+        >
+          {String(active + 1).padStart(2, '0')} / {String(SLIDES.length).padStart(2, '0')}
+        </span>
       </div>
     </section>
   )
